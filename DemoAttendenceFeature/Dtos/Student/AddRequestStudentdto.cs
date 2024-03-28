@@ -8,7 +8,7 @@ namespace DemoAttendenceFeature.Dtos.Student
         public string Name { get; set; }
         public string Class { get; set; }
         public int Age { get; set; }
-        public string? Email { get; set; }
+        public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
 
@@ -21,6 +21,11 @@ namespace DemoAttendenceFeature.Dtos.Student
         public string? Phone { get; set; }
 
         public string? CurrentStatus { get; set; }
+
+        //Image Fields
+        public IFormFile? StudentImage { get; set; }
+        public IFormFile? BirthCertificateImage { get; set; }
+        public IFormFile? NicImage { get; set; }
         public AddRequestEmergencyContactInfoDto? StudentEmergencyContactInfo { get; set; }
         public AddRequestEducationInfoDto? StudentEducationInfo { get; set; }
         public AddRequestStudentMedicalInfoDto? StudentMedicalInfo { get; set; }

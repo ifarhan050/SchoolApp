@@ -15,7 +15,7 @@ namespace DemoAttendenceFeature.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RollNo { get; set; }
         public string Name { get; set; }
-        [AllowNull]
+        
         public string? Class { get; set; }
         public int Age { get; set; }
 
@@ -33,6 +33,13 @@ namespace DemoAttendenceFeature.Entities
         public string? Phone { get; set; }
 
         public string? CurrentStatus { get; set; }
+
+
+
+        //Image Fields
+        public string? StudentImageUrl { get; set; }
+        public string? BirthCertificateImageUrl { get; set; }
+        public string? NicImageUrl { get; set; }
 
         public ICollection<Guardian> Guardians { get; set; }
         public ICollection<Attendence> Attendences { get; set; }

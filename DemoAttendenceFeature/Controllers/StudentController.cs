@@ -48,11 +48,9 @@ namespace DemoAttendenceFeature.Controllers
 
 
         [HttpPost]
-        [Consumes("application/json")]
-        [Produces("application/json")]
         [ProducesResponseType(typeof(GetResponseStudentDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(InternalServerResponse), (int)HttpStatusCode.InternalServerError)]
-        public async Task<ActionResult<GetResponseStudentDto>> CreateStudent([FromBody]AddRequestStudentdto studentDto)
+        public async Task<ActionResult<GetResponseStudentDto>> CreateStudent([FromForm]AddRequestStudentdto studentDto)
         {
             try
             {
@@ -112,7 +110,7 @@ namespace DemoAttendenceFeature.Controllers
         [HttpPut("{studentId:Guid}")]
         [ProducesResponseType(typeof(GetResponseStudentDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(InternalServerResponse), (int)HttpStatusCode.InternalServerError)]
-        public async Task<ActionResult<GetResponseStudentDto>> UpdateStudent(Guid studentId, [FromBody] AddRequestStudentdto studentDto)
+        public async Task<ActionResult<GetResponseStudentDto>> UpdateStudent(Guid studentId, [FromForm] AddRequestStudentdto studentDto)
         {
             var student = await _studentService.UpdateStudent(studentId,studentDto);
             if (student==null)

@@ -3,18 +3,21 @@ using DemoAttendenceFeature.Dtos.Student;
 using DemoAttendenceFeature.Entities;
 using DemoAttendenceFeature.Helper.Constant_Enums;
 using DemoAttendenceFeature.Infrastructure.Interface;
+using DemoAttendenceFeature.Utility.Interface;
 
 namespace DemoAttendenceFeature.Service
 {
     public class StudentService
     {
         private readonly IStudentRepository _studentRepository;
+        private readonly IImageTransaction _imageTransaction;
         private readonly IMapper _mapper;
 
-        public StudentService(IStudentRepository studentRepository, IMapper mapper)
+        public StudentService(IStudentRepository studentRepository, IMapper mapper, IImageTransaction imageTransaction)
         {
             _studentRepository = studentRepository;
             _mapper = mapper;
+            _imageTransaction = imageTransaction;
         }
 
         public async Task<GetResponseStudentDto?> GetStudentById(Guid id)
@@ -31,6 +34,20 @@ namespace DemoAttendenceFeature.Service
         {
             var student = _mapper.Map<Student>(createStudentDto);
             student.AdmissionStatus = new StudentAdmissionStatus() { Status = AdmissionStatusEnum.Registered.ToString() };
+            var guidId= Guid.NewGuid().ToString();
+            student.NicImageUrl = createStudentDto?.NicImage!=null?await _imageTransaction.UploadImage(createStudentDto.NicImage, $"{nameof(Student)}_{guidId}", guidId):null;
+            student.StudentImageUrl = createStudentDto?.StudentImage!=null?await _imageTransaction.UploadImage(createStudentDto.StudentImage, $"{nameof(Student)}_{guidId}", guidId):null;
+            student.BirthCertificateImageUrl = createStudentDto?.BirthCertificateImage!=null?await _imageTransaction.UploadImage(createStudentDto.BirthCertificateImage, $"{nameof(Student)}_{guidId}", guidId):null;
+            var studentguradiandtoarray=createStudentDto.Guardians.ToArray();
+            var studentguardiansarray = student.Guardians.ToArray();
+            for (int i = 0;i< studentguradiandtoarray?.Length; i++)
+            {
+                studentguardiansarray[i].NicImageUrl = studentguradiandtoarray[i]?.NicImage != null ?
+                    await _imageTransaction.UploadImage(createStudentDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                studentguardiansarray[i].GuardianImageUrl = studentguradiandtoarray[i]?.NicImage != null ?
+                   await _imageTransaction.UploadImage(createStudentDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+            }
+            student.Guardians = studentguardiansarray.ToList();
             var studentId=await _studentRepository.CreateStudent(student);
             return studentId;
         }
@@ -62,6 +79,20 @@ namespace DemoAttendenceFeature.Service
             if (student != null)
             { 
                 _mapper.Map(requestDto, student);
+                var guidId = Guid.NewGuid().ToString();
+                student.NicImageUrl = requestDto?.NicImage != null ? await _imageTransaction.UploadImage(requestDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                student.StudentImageUrl = requestDto?.StudentImage != null ? await _imageTransaction.UploadImage(requestDto.StudentImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                student.BirthCertificateImageUrl = requestDto?.BirthCertificateImage != null ? await _imageTransaction.UploadImage(requestDto.BirthCertificateImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                var studentguradiandtoarray = requestDto.Guardians.ToArray();
+                var studentguardiansarray = student.Guardians.ToArray();
+                for (int i = 0; i < studentguradiandtoarray?.Length; i++)
+                {
+                    studentguardiansarray[i].NicImageUrl = studentguradiandtoarray[i]?.NicImage != null ?
+                        await _imageTransaction.UploadImage(requestDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                    studentguardiansarray[i].GuardianImageUrl = studentguradiandtoarray[i]?.NicImage != null ?
+                       await _imageTransaction.UploadImage(requestDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                }
+                student.Guardians = studentguardiansarray.ToList();
                 await _studentRepository.UpdateStudent(student);
                 var studentDto=_mapper.Map<GetResponseStudentDto>(student);
                 return studentDto;

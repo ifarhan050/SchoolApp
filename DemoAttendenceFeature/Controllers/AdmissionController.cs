@@ -23,6 +23,7 @@ namespace DemoAttendenceFeature.Controllers
         {
             try
             {
+
                 var studentDto = await _admissionStudentService.CreateStudentApplication(requestDto);
                 if (studentDto == null)
                 {

@@ -7,11 +7,15 @@ namespace DemoAttendenceFeature.Dtos.Student
         public Guid Id { get; set; }
         public int RollNo { get; set; }
         public string Name { get; set; }
-        public string Class { get; set; }
+
+        public string? Class { get; set; }
         public int Age { get; set; }
+
+        public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string? Email { get; set; }
         public string Gender { get; set; }
+
+        //Extra Fields
         public string? Nic { get; set; }
         public string? Nationality { get; set; }
         public string? PermenantAddress { get; set; }
@@ -21,6 +25,13 @@ namespace DemoAttendenceFeature.Dtos.Student
         public string? Phone { get; set; }
 
         public string? CurrentStatus { get; set; }
+
+
+
+        //Image Fields
+        public string? StudentImageUrl { get; set; }
+        public string? BirthCertificateImageUrl { get; set; }
+        public string? NicImageUrl { get; set; }
 
         public GetResponseAdmissionDto? AdmissionStatus { get; set; }
         public GetResponseEmergencyContactInfoDto? StudentEmergencyContactInfo { get; set; }

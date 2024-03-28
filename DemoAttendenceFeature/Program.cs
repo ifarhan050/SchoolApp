@@ -7,6 +7,8 @@ using DemoAttendenceFeature.Infrastructure.Interface;
 using DemoAttendenceFeature.Mapping;
 using DemoAttendenceFeature.Service;
 using DemoAttendenceFeature.Setting_Models;
+using DemoAttendenceFeature.Utility;
+using DemoAttendenceFeature.Utility.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,7 @@ builder.Services.AddScoped<IAttendenceRepository, AttendenceRepository>();
 builder.Services.AddScoped<IGuardianRepository, GuardianRepository>();
 builder.Services.AddScoped<IAdmissionStudentStatusRepository,AdmissionStudentStatusRepository>();
 builder.Services.AddScoped<IEmail, Email>();
+builder.Services.AddScoped<IImageTransaction, ImgaeTransaction>();
 builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<GuardianService>();
 builder.Services.AddScoped<GuardianStudentService>();

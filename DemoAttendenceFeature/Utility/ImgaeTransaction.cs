@@ -11,8 +11,8 @@ namespace DemoAttendenceFeature.Utility
     {
         public string api, email,password,bucket,rootFolder;
         public IConfiguration _configuration { get; set; }
-        public IWebHostEnvironment _hostEnvironment { get; set; }
-        public ImgaeTransaction(IConfiguration configuration, IWebHostEnvironment hostEnvironment)
+        public IHostEnvironment _hostEnvironment { get; set; }
+        public ImgaeTransaction(IConfiguration configuration, IHostEnvironment hostEnvironment)
         {
             _configuration = configuration;
             _hostEnvironment = hostEnvironment;
@@ -34,26 +34,18 @@ namespace DemoAttendenceFeature.Utility
                 AuthTokenAsyncFactory = () => Task.FromResult(firebaseAuth.FirebaseToken),
                 ThrowOnCancel = true,
             });
-            var uploadfolder = Path.Join(rootFolder, subFolder);
-            if (!Directory.Exists(uploadfolder))
-                Directory.CreateDirectory(uploadfolder);
 
             var uniqueFileName = id + "_" + imageFile.FileName;
-            var filePath = Path.Combine(uploadfolder, uniqueFileName);
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
+           
 
-            using (var fileStream = new FileStream(filePath, FileMode.Open))
+            using (var fileStream = imageFile.OpenReadStream())
             {
                 imageUrl = await storage.Child("images")
                                         .Child(subFolder)
                                         .Child(uniqueFileName)
                                         .PutAsync(fileStream);
             }
-            File.Delete(filePath);
             return imageUrl;
         }
     }

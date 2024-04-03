@@ -52,5 +52,6 @@ app.MigrateDatabase<AppDbContext>();
 //app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseStaticFiles();
 app.UseCors();
 app.Run();

@@ -1,9 +1,11 @@
 ﻿using DemoAttendenceFeature.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoAttendenceFeature.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext: IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options) 
         {
@@ -68,6 +70,24 @@ namespace DemoAttendenceFeature.Data
                .HasForeignKey<StudentMedicalInfo>(x => x.StudentId)
                .OnDelete(DeleteBehavior.Cascade);
 
+
+
+            base.OnModelCreating(modelBuilder);
+
+            var adminRoleid = "bf0acce0 - d5be - 42cc - a5eb - 71dec7688180";
+            var roles = new List<IdentityRole>()
+            {
+                new IdentityRole()
+                {
+                    Id = adminRoleid,
+                    Name = "Admin",
+                    ConcurrencyStamp = adminRoleid,
+                    NormalizedName = "Admin".ToUpper()
+                }
+
+            };
+
+            modelBuilder.Entity<IdentityRole>().HasData(roles);
 
 
         }

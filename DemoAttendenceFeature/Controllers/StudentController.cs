@@ -5,12 +5,14 @@ using DemoAttendenceFeature.Entities;
 using DemoAttendenceFeature.ExampleResponse;
 using DemoAttendenceFeature.Infrastructure.Interface;
 using DemoAttendenceFeature.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace DemoAttendenceFeature.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase

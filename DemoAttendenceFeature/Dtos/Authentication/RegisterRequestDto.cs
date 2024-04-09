@@ -12,6 +12,8 @@ namespace DemoAttendenceFeature.Dtos.Authentication
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Compare("Password", ErrorMessage = "Passwords do not match.")]
+        public string ConfirmPassword { get; set; }
         public string[] Roles { get; set; }
     }
 }

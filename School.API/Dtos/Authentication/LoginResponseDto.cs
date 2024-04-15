@@ -1,4 +1,4 @@
-﻿namespace DemoAttendenceFeature.Dtos.Authentication
+﻿namespace SchoolApp.API.Dtos.Authentication
 {
     public class LoginResponseDto
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DemoAttendenceFeature.Dtos.Authentication
+namespace SchoolApp.API.Dtos.Authentication
 {
     public class RegisterRequestDto
     {

@@ -1,4 +1,4 @@
-﻿using DemoAttendenceFeature.Dtos.Authentication;
+﻿using SchoolApp.API.Dtos.Authentication;
 using DemoAttendenceFeature.Infrastructure.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

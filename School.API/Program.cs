@@ -32,6 +32,7 @@ builder.Services.AddScoped<GuardianStudentService>();
 builder.Services.AddScoped<AttendenceService>();
 builder.Services.AddScoped<AdmissionService>();
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<RegistrationEmailService>();
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddCors(options=>options.AddDefaultPolicy(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
@@ -51,5 +52,6 @@ app.MigrateDatabase<AppDbContext>();
 //app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseStaticFiles();
 app.UseCors();
 app.Run();

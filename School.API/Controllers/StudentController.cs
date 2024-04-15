@@ -104,7 +104,7 @@ namespace DemoAttendenceFeature.Controllers
             {
                 return NotFound(new { message = "Student Not Found" });
             }
-            return Ok(new { message = $"{studentId} deleted successfully" });
+            return Ok(new { studentid=studentId} );
         }
 
         [HttpPut("{studentId:Guid}")]

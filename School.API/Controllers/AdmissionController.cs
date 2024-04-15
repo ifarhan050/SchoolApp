@@ -12,14 +12,16 @@ namespace DemoAttendenceFeature.Controllers
     public class AdmissionController : ControllerBase
     {
         private readonly AdmissionService _admissionStudentService;
+        private readonly RegistrationEmailService _emailService;
 
-        public AdmissionController(AdmissionService admissionStudentService)
+        public AdmissionController(AdmissionService admissionStudentService, RegistrationEmailService emailService)
         {
             _admissionStudentService = admissionStudentService;
+            _emailService = emailService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<GetResponseStudentDto>> CreateApplicant(AddRequestStudentdto requestDto)
+        public async Task<ActionResult<GetResponseStudentDto>> CreateApplicant([FromForm]AddRequestStudentdto requestDto)
         {
             try
             {
@@ -29,6 +31,7 @@ namespace DemoAttendenceFeature.Controllers
                 {
                     return BadRequest(new { message = "Failed to Apply" });
                 }
+                var isSent = await _emailService.RegistrationAlertEmail(studentDto.Id);
                 return Ok(studentDto);
             }
             catch (Exception ex)

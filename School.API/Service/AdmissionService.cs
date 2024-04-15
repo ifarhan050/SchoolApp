@@ -26,6 +26,7 @@ namespace DemoAttendenceFeature.Service
 
         public async Task<GetResponseStudentDto?> CreateStudentApplication(AddRequestStudentdto requestDto)
         {
+            
             var student = _mapper.Map<Student>(requestDto);
             student.AdmissionStatus = new StudentAdmissionStatus() { Status = AdmissionStatusEnum.Pending.ToString() };
             var guidId = Guid.NewGuid().ToString();

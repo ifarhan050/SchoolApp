@@ -43,9 +43,9 @@ namespace DemoAttendenceFeature.Service
             for (int i = 0;i< studentguradiandtoarray?.Length; i++)
             {
                 studentguardiansarray[i].NicImageUrl = studentguradiandtoarray[i]?.NicImage != null ?
-                    await _imageTransaction.UploadImage(createStudentDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                    await _imageTransaction.UploadImage(createStudentDto.NicImage, $"{nameof(Student)}_{student.Name}", guidId) : null;
                 studentguardiansarray[i].GuardianImageUrl = studentguradiandtoarray[i]?.NicImage != null ?
-                   await _imageTransaction.UploadImage(createStudentDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                   await _imageTransaction.UploadImage(createStudentDto.NicImage, $"{nameof(Student)}_{student.Name}", guidId) : null;
             }
             student.Guardians = studentguardiansarray.ToList();
             var studentId=await _studentRepository.CreateStudent(student);
@@ -88,9 +88,9 @@ namespace DemoAttendenceFeature.Service
                 for (int i = 0; i < studentguradiandtoarray?.Length; i++)
                 {
                     studentguardiansarray[i].NicImageUrl = studentguradiandtoarray[i]?.NicImage != null ?
-                        await _imageTransaction.UploadImage(requestDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                        await _imageTransaction.UploadImage(requestDto.NicImage, $"{nameof(Student)}_{student.Name}", guidId) : null;
                     studentguardiansarray[i].GuardianImageUrl = studentguradiandtoarray[i]?.NicImage != null ?
-                       await _imageTransaction.UploadImage(requestDto.NicImage, $"{nameof(Student)}_{guidId}", guidId) : null;
+                       await _imageTransaction.UploadImage(requestDto.NicImage, $"{nameof(Student)}_{student.Name}", guidId) : null;
                 }
                 student.Guardians = studentguardiansarray.ToList();
                 await _studentRepository.UpdateStudent(student);

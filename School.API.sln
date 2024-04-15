@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoAttendenceFeature", "DemoAttendenceFeature\DemoAttendenceFeature.csproj", "{36B87949-544B-449D-A037-EAF733FB85BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolApp.API", "School.API\SchoolApp.API.csproj", "{C5ECAB1E-12FD-46AE-8838-B62676F9BAE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{36B87949-544B-449D-A037-EAF733FB85BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36B87949-544B-449D-A037-EAF733FB85BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36B87949-544B-449D-A037-EAF733FB85BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36B87949-544B-449D-A037-EAF733FB85BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5ECAB1E-12FD-46AE-8838-B62676F9BAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5ECAB1E-12FD-46AE-8838-B62676F9BAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5ECAB1E-12FD-46AE-8838-B62676F9BAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5ECAB1E-12FD-46AE-8838-B62676F9BAE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

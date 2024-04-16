@@ -30,7 +30,7 @@ namespace DemoAttendenceFeature.Service
             }
             return null;
         }
-        public async Task<Guid?> CreateStudent(AddRequestStudentdto createStudentDto)
+        public async Task<GetResponseStudentDto> CreateStudent(AddRequestStudentdto createStudentDto)
         {
             var student = _mapper.Map<Student>(createStudentDto);
             student.AdmissionStatus = new StudentAdmissionStatus() { Status = AdmissionStatusEnum.Registered.ToString() };
@@ -48,8 +48,9 @@ namespace DemoAttendenceFeature.Service
                    await _imageTransaction.UploadImage(createStudentDto.NicImage, $"{nameof(Student)}_{student.Name}", guidId) : null;
             }
             student.Guardians = studentguardiansarray.ToList();
-            var studentId=await _studentRepository.CreateStudent(student);
-            return studentId;
+            student=await _studentRepository.CreateStudent(student);
+            var studentDto = _mapper.Map<GetResponseStudentDto>(student);
+            return studentDto;
         }
 
         public async Task<IEnumerable<GetResponseStudentDto>?> GetAllStudents()

@@ -15,11 +15,11 @@ namespace DemoAttendenceFeature.Infrastructure
             _dbContext = dbContext;
         }
 
-        public async Task<Guid?> CreateStudent(Student student)
+        public async Task<Student> CreateStudent(Student student)
         {
             var studentdata=await _dbContext.students.AddAsync(student);
             var result=await _dbContext.SaveChangesAsync();
-            return result>0?studentdata.Entity.Id:null;
+            return studentdata.Entity;
         }
 
         public async Task<IEnumerable<Student>?> GetAllStudents(bool inlcudeAll=false)

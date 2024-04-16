@@ -56,12 +56,12 @@ namespace DemoAttendenceFeature.Controllers
         {
             try
             {
-                var studentId = await _studentService.CreateStudent(studentDto);
-                if (studentId == null)
+                var student = await _studentService.CreateStudent(studentDto);
+                if (student == null)
                 {
                     return BadRequest(new { message = "Failed to Create Student" });
                 }
-                return Ok(new { id=studentId });
+                return Ok(student);
             }
             catch (Exception ex)
             {
